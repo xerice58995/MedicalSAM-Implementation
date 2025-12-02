@@ -53,7 +53,7 @@ def lcc_transform(pred_mask):
     # centroids: 每個區域的質心座標 [x, y]
     """
     pred_mask = pred_mask.astype(np.uint8)
-    num_labels, labels, stats, centroids = connectedComponentsWithStats(
+    num_labels, labels, stats, centroids = cv2.connectedComponentsWithStats(
         pred_mask, connectivity=8
     )
 
