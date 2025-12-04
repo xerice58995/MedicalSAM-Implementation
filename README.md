@@ -6,16 +6,22 @@ This project implements an automated endoscopic polyp segmentation system based 
 
 ```text
 MedicalSAM/
-├── Weights/               # Pre-trained weights (e.g., sam_vit_b_01ec64.pth)
-├── logs/                  # TensorBoard logs
-├── Training.py            # Main script: Training, Validation, and Testing loops
-├── Model.py               # Model architecture: MedSAM freeze & fine-tune logic
-├── Datasplit.py           # Data processing: Train/Val/Test split (8:1:1)
-├── Preprocessing.py       # Data loading: Dataset Class & Albumentations
-├── LossFunction.py        # Loss function: BCE + Dice Loss combination
-├── EvaluationMetrics.py   # Metrics: Dice, IoU, HD95, LCC post-processing
-├── requirements.txt       # Dependencies
-└── README.md              # Project documentation
+├── data/                      
+│   └── Kvasir-SEG/            # 原始影像與標註，需自行下載
+│
+├── src/                       
+│   ├── logs/                  # TensorBoard 訓練日誌
+│   ├── Datasplit.py           # Train/Val/Test 資料分割（8:1:1）
+│   ├── EvaluationMetrics.py   # 評估指標：Dice、HD95、LCC
+│   ├── GPU_release.py         # 釋放 GPU 記憶體的工具程式
+│   ├── LossFunction.py        # BCE + Dice Loss
+│   ├── Model.py               # MedSAM 主模型，包含 encoder/decoder 與 fine-tune 設計
+│   ├── Preprocessing.py       # Dataset class 與 Albumentations 資料前處理
+│   └── Training.py            # 主訓練流程：Train / Validation / Testing loop
+│   └── requirements.txt       # 所需套件清單
+│
+└── Weights/
+    └── sam_vit_b_01ec64.pth   # 預訓練的 SAM 模型權重，需自行下載
 ```
 
 ##  Quick Start
@@ -25,9 +31,7 @@ MedicalSAM/
 Ensure Python 3.8+ and PyTorch are installed. Install the required packages:
 
 ```bash
-pip install torch torchvision
-pip install segment-anything
-pip install opencv-python scipy matplotlib tqdm tensorboard albumentations scikit-learn
+pip install -r requirements.txt
 ```
 
 ### 2. Prepare Weights
@@ -38,7 +42,7 @@ This project uses SAM (ViT-B) as the base model. Download the weights and place 
 
 ### 3. Prepare Dataset
 
-Download the **Kvasir-SEG** dataset and ensure the directory structure matches below (or update `root_dir` in `Training.py`):
+Download the **Kvasir-SEG** dataset and ensure the directory structure matches below:
 
 ```text
 MedicalSAM/
@@ -50,7 +54,7 @@ MedicalSAM/
 
 ### 4. Training
 
-Run the main script to start training, validation, and testing:
+Make sure to run the main script under the `src/` directory:
 
 ```bash
 python Training.py
