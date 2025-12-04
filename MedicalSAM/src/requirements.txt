@@ -1,0 +1,11 @@
+torch
+torchvision
+albumentations
+opencv-python
+numpy
+scipy
+scikit-learn
+pillow
+tensorboard
+tqdm
+segment-anything@git+https://github.com/facebookresearch/segment-anything.git
