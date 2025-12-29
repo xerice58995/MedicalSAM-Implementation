@@ -1,7 +1,7 @@
 # MedSAM Polyp Segmentation
 
 This project implements an automated endoscopic polyp segmentation system based on **MedSAM (Segment Anything Model for Medical Images)**. By freezing the pre-trained Image Encoder and fine-tuning the Mask Decoder, combined with Bounding Box prompt learning and **LCC (Largest Connected Component)** post-processing, the system achieves high-precision segmentation on the Kvasir-SEG dataset.
-
+![Figure 1](demo.png)
 ##  Project Structure
 
 ```text
